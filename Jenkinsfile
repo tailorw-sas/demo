@@ -14,12 +14,13 @@ pipeline {
                     //def repoName = env.REPO_NAME     // Reemplaza con tu repositorio o usa env.GITHUB_REPOSITORY_NAME
                     def repoName = 'demo'
 
-                    echo "prNumber: ${prNumber}"
+                    
                   
                     // URL de la API de GitHub para obtener el PR
                     def apiUrl = "https://api.github.com/repos/${repoOwner}/${repoName}/pulls/${prNumber}"
 
-                  echo "apiURLL: ${apiUrl}"
+                    echo "prNumber: ${prNumber}"
+                    echo "apiURLL: ${apiUrl}"
 
                   
                     // Hacer una llamada curl para obtener la información del PR
