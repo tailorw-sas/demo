@@ -6,7 +6,7 @@ pipeline {
             genericVariables: [
                 [key: 'commit_message', expressionType: 'JSONPath', expression: '$.head_commit.message']
             ],
-            token: 'your-webhook-token',
+            token: '1234567890',
             causeString: 'Triggered by push',
             printContributedVariables: true,
             printPostContent: true
