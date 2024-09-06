@@ -10,13 +10,21 @@ pipeline {
                 script {
                     
                     echo "****************Commit Hash: ${env.GIT_COMMIT}"
-                     echo "****************Commit Id: ${env.CHANGE_ID}"
-                    echo "****************Commit Title: ${env.CHANGE_TITLE}"
-                     echo "****************Commit Author: ${env.CHANGE_AUTHOR}"
                     
                     def apiUrl = "https://api.github.com/repos/tailorw-sas/demo/pulls?state=all"
-                    //def response = sh(script: "curl ")
-
+                    def response = sh(script: "curl -H \"Authorization: token ${GITHUB_TOKEN}\" ${apiUrl}", returnStdout: true)
+                    def pullRequests = readJSON(text: response)
+                    def prTitle
+                    def prUser
+                    def matchingPullRequest = pullRequests.find { pr -> pr.merge_commit_sha == env.GIT_COMMIT }
+                    if (matchingPullRequest) {
+                        echo "Found PR: ${matchingPullRequest.title}"
+                        echo "PR Number: ${matchingPullRequest.number}"
+                        echo "Author: ${matchingPullRequest.user.login}"
+                    } else {
+                        echo "No PR found with merge_commit_sha: ${gitCommitSha}"
+                    }
+                    
                     
                     def changes = sh(script: 'git diff --name-only HEAD^ HEAD', returnStdout: true).trim().split('\n')
                         echo "changes: ${changes}"
