@@ -1,5 +1,18 @@
 pipeline {
     agent any
+
+    triggers {
+        GenericTrigger(
+            genericVariables: [
+                [key: 'commit_message', expressionType: 'JSONPath', expression: '$.head_commit.message']
+            ],
+            token: 'your-webhook-token',
+            causeString: 'Triggered by push',
+            printContributedVariables: true,
+            printPostContent: true
+        )
+    }
+    
     environment {
         GITHUB_TOKEN = credentials('TokenForJenkinsAuthentication') // El token guardado en Jenkinss
     }
