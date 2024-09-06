@@ -9,7 +9,7 @@ pipeline {
                 script {
                     // Número del Pull Request
                     def prNumber = env.CHANGE_ID
-                    //def repoOwner = env.ORG_NAME     // Reemplaza con tu organización o usa env.GITHUB_REPOSITORY_OWNER
+                    //def repoOwner = env.ORG_NAME     // Reemplaza con tu organización o usa env.GITHUB_REPOSITORY_OWNERr
                     def repoOwner = 'tailorw-sas'
                     //def repoName = env.REPO_NAME     // Reemplaza con tu repositorio o usa env.GITHUB_REPOSITORY_NAME
                     def repoName = 'demo'
