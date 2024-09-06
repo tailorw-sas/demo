@@ -3,13 +3,8 @@ pipeline {
      triggers {
         // Configuración del webhook
         GenericTrigger(
-            genericVariables: [
-                [key: 'pusher_email', expressionType: 'JSONPath', expression: '$.pusher.email'],
-                [key: 'pusher_name', expressionType: 'JSONPath', expression: '$.pusher.name'],
-                [key: 'commit_message', expressionType: 'JSONPath', expression: '$.head_commit.message']
-            ],
-            token: '1234567890',  // Token que usarás en GitHub
-            causeString: 'Triggered on push by $pusher_name',
+            token: '1234567890',  
+            causeString: 'Triggered on push by',
             printContributedVariables: true,
             printPostContent: true
         )
