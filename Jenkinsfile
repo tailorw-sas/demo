@@ -11,7 +11,6 @@ pipeline {
         EMAIL_FROM = "${env.CORREO_ORIGEN}"
         ESTADO_OK = 'OK'
         ESTADO_ERROR = 'ERROR'
-        SISTEMA = 'ERP'
         ORIGIN_BRANCH_NAME = "${env.GIT_BRANCH}"
     }
     stages {
