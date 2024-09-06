@@ -13,6 +13,7 @@ pipeline {
                     
                     def apiUrl = "https://api.github.com/repos/tailorw-sas/demo/pulls?state=all"
                     def response = sh(script: "curl -H \"Authorization: token ${GITHUB_TOKEN}\" ${apiUrl}", returnStdout: true)
+                    echo "${response}"
                     def pullRequests = readJSON(text: response)
                     def prTitle
                     def prUser
