@@ -9,7 +9,7 @@ pipeline {
             steps {
                 script {
                     
-                    echo "****************Commit Hash: ${env.GIT_COMMIT}"
+                    echo "****************Commit Hash: ${env.GIT_COMMIT} ****************"
                     
                     def apiUrl = "https://api.github.com/repos/tailorw-sas/demo/pulls?state=all"
                     def response = sh(script: "curl -H \"Authorization: Bearer ${GITHUB_TOKEN}\" -H \"Accept: application/vnd.github+json\" -H \"X-GitHub-Api-Version: 2022-11-28\" ${apiUrl}", returnStdout: true)
