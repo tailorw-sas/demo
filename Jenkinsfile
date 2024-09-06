@@ -1,18 +1,6 @@
 pipeline {
     agent any
 
-    triggers {
-        GenericTrigger(
-            genericVariables: [
-                [key: 'email', expressionType: 'JSONPath', expression: '$pusher.email']
-            ],
-            token: '1234567890',
-            causeString: 'Triggered by push',
-            printContributedVariables: true,
-            printPostContent: true
-        )
-    }
-    
     environment {
         GITHUB_TOKEN = credentials('TokenForJenkinsAuthentication') // El token guardado en Jenkinss
     }
@@ -21,6 +9,7 @@ pipeline {
             steps {
                 script {
                     // Número del Pull Request
+                    echo "****************Commit Hash: ${env.GIT_COMMIT}"
                     echo "***************EMAIL: ${email}"
                     def commitMessage = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
                     echo "Commit Message: ${commitMessage}"
