@@ -48,7 +48,8 @@ pipeline {
                     env.EMAIL_AUTHOR = prInfo.authorEmail
                     def branch = env.ORIGIN_BRANCH_NAME.replace('origin/', '')
                     env.BRANCH_NAME = branch
-                    
+
+                    echo "*********** CHANGES: **************"
                     def changes = sh(script: 'git diff --name-only HEAD^ HEAD', returnStdout: true).trim().split('\n')
                         echo "changes: ${changes}"
                 }
