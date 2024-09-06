@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GITHUB_TOKEN = credentials('TokenForJenkinsAuthentication') // El token guardado en Jenkinss
+        GIT_TOKEN = "${env.GITHUB_TOKEN}"
     }
     stages {
         stage('Get PR Author Email') {
@@ -12,7 +12,7 @@ pipeline {
                     echo "****************Commit Hash: ${env.GIT_COMMIT} ****************"
                     
                     def apiUrl = "https://api.github.com/repos/tailorw-sas/demo/pulls?state=all"
-                    def response = sh(script: "curl -H \"Authorization: Bearer ${GITHUB_TOKEN}\" -H 'Accept: application/vnd.github.v3+json' ${apiUrl}", returnStdout: true)
+                    def response = sh(script: "curl -H \"Authorization: token ${env.GIT_TOKEN}\" -H 'Accept: application/vnd.github.v3+json' ${apiUrl}", returnStdout: true)
                     echo "${response}"
                     def pullRequests = readJSON(text: response)
                     def prTitle
