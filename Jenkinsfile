@@ -41,8 +41,8 @@ pipeline {
                     echo "author: ${prInfo.author}"
                     echo "authorEmail: ${prInfo.authorEmail}"
 
-                    env.EMAIL_LIST = prInfo.authorEmail
-
+                    env.EMAIL_LIST = env.EMAIL_LIST_DEV_ERP
+                    env.EMAIL_AUTHOR = prInfo.authorEmail
                     def branch = env.ORIGIN_BRANCH_NAME.replace('origin/', '')
                     env.BRANCH_NAME = branch
                     
@@ -57,13 +57,13 @@ pipeline {
         success {
             script {
                 def notificator = new NotificadorEmail(this)
-                notificator.sendEmail(env.EMAIL_LIST, env.EMAIL_FROM, env.GITHUB_REPO, env.SISTEMA, env.BRANCH_NAME, env.ESTADO_OK)
+                notificator.sendEmail(env.EMAIL_AUTHOR, env.EMAIL_LIST, env.EMAIL_FROM, env.GITHUB_REPO, env.SISTEMA, env.BRANCH_NAME, env.ESTADO_OK)
             }
         }
         failure {
             script {
                 def notificator = new NotificadorEmail(this)
-                notificator.sendEmail(env.EMAIL_LIST, env.EMAIL_FROM, env.GITHUB_REPO, env.SISTEMA, env.BRANCH_NAME, env.ESTADO_ERROR)
+                notificator.sendEmail(env.EMAIL_AUTHOR, env.EMAIL_LIST, env.EMAIL_FROM, env.GITHUB_REPO, env.SISTEMA, env.BRANCH_NAME, env.ESTADO_ERROR)
             }
         }
     }
