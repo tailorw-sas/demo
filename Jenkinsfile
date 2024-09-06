@@ -8,15 +8,16 @@ pipeline {
         stage('Get PR Author Email') {
             steps {
                 script {
-                    // Número del Pull Request
+                    
                     echo "****************Commit Hash: ${env.GIT_COMMIT}"
-                    echo "***************EMAIL: ${email}"
-                    def commitMessage = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
-                    echo "Commit Message: ${commitMessage}"
-                    def branchName = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
-                    def prNumber = branchName.replaceAll('refs/pull/', '').replaceAll('/merge', '')
-                    echo "Pull Request Number: ${prNumber}"
+                     echo "****************Commit Id: ${env.CHANGE_ID}"
+                    echo "****************Commit Title: ${env.CHANGE_TITLE}"
+                     echo "****************Commit Author: ${env.CHANGE_AUTHOR}"
+                    
+                    def apiUrl = "https://api.github.com/repos/tailorw-sas/demo/pulls?state=all"
+                    //def response = sh(script: "curl ")
 
+                    
                     def changes = sh(script: 'git diff --name-only HEAD^ HEAD', returnStdout: true).trim().split('\n')
                         echo "changes: ${changes}"
                 }
