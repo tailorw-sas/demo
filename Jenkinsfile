@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        GITHUB_TOKEN = credentials('TokenForJenkinsAuthentication') // El token guardado en Jenkins
+        GITHUB_TOKEN = credentials('TokenForJenkinsAuthentication') // El token guardado en Jenkinss
     }
     stages {
         stage('Get PR Author Email') {
