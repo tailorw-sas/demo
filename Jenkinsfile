@@ -4,7 +4,7 @@ pipeline {
     triggers {
         GenericTrigger(
             genericVariables: [
-                [key: 'commit_message', expressionType: 'JSONPath', expression: '$.head_commit.message']
+                [key: 'email', expressionType: 'JSONPath', expression: '$pusher.email']
             ],
             token: '1234567890',
             causeString: 'Triggered by push',
@@ -21,6 +21,7 @@ pipeline {
             steps {
                 script {
                     // Número del Pull Request
+                    echo "***************EMAIL: ${email}"
                     def commitMessage = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
                     echo "Commit Message: ${commitMessage}"
                     def branchName = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
