@@ -1,5 +1,4 @@
-@Library('PullRequestInfo') _
-@Library('emailNotification') _
+@Library(['PullRequestInfo', 'emailNotification']) _
 import com.tailorwsas.notificaciones.NotificadorEmail
 
 pipeline {
